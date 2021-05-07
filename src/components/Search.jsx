@@ -15,20 +15,20 @@ import "./../App.scss";
 const Search = () => {
   return (
     <>
-      <Row className="searchbar w-50 m-auto">
+      <Row className="searchbar w-50 m-auto ">
         <Form className="d-flex">
           <Form.Control
-            className="me-2 search-input"
+            className="me-2 search-input border-0"
             type="search"
             placeholder="Search"
             aria-label="Search"
           />
-
-          <Button variant="btn-outline-secondary" type="submit">
+          <Button variant="boutline-secondary" type="submit">
             Go
           </Button>
         </Form>
       </Row>
+      <hr size="6" class="bg-warning" />
     </>
   );
 };

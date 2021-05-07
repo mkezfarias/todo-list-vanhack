@@ -20,7 +20,7 @@ const Nav = () => {
       <Container fluid className="d-flex justify-content-between">
         <Col xl={8} offset={1} className="navbar-brand mx-5">
           <FontAwesomeIcon icon={faCheckCircle} className="icon icon-big" />
-          <span className="logo-text">LET'S DO IT</span>
+          <span className="logo-text ">LET'S DO IT</span>
         </Col>
         <Col xl={2}>
           <a className="nav-link active text-gray" aria-current="page" href="#">
