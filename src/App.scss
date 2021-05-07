@@ -40,13 +40,6 @@ ol[class] {
 }
 
 
-/* Make images easier to work with */
-img {
-  max-width: 100%;
-  display: block;
-}
-
-
 /* Inherit fonts for inputs and buttons */
 button,
 textarea,
@@ -63,6 +56,10 @@ select {
 
 i {
   font-size: 20px;
+}
+
+.dododod {
+  background-color: red;
 }
 
 .icon {
@@ -84,6 +81,10 @@ i {
   transform: scale(1.2);
 }
 
+.icon-big {
+  font-size: 20px !important;
+  margin-right: 10px;
+}
 
 .logo-text{
     font-size: 1.5rem;
@@ -159,4 +160,4 @@ hr {
 }
 
     
-    
+@import "../node_modules/bootstrap/scss/bootstrap";

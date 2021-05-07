@@ -1,13 +1,22 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import TodoForm from './components/TodoForm'
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Nav from './components/Nav.jsx';
+import Search from './components/Search.jsx';
+
 
 const  App = () => {
 
   return (
     <div className="App">
       <div className="App-content">
+        <Nav />
+        <Search />
+
         <TodoForm />
+        
       </div>
     </div>
   );
