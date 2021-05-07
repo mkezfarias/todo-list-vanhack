@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Col,
@@ -16,11 +16,35 @@ import {
   faClock,
   faCaretLeft,
   faCaretRight,
+  faCheckSquare,
+  faSquareFull,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./../App.scss";
+import wait from "waait";
 
-const Title = (props) => {
+export default function Title(props) {
+  const [allSelected, setAllSelected] = useState(false);
+  const [iconSelected, setIconSelected] = useState(faSquareFull);
+
+  const updateIcons = (e) => {
+    let squares = document.querySelectorAll(".individualSelected");
+    console.log(squares);
+    squares.forEach((square) => {
+      square.firstElementChild.classList.toggle("text-warning");
+      square.firstElementChild.classList.toggle("selectedSquare");
+    });
+  };
+
+  const selectAll = (e) => {
+    let status = !allSelected;
+    setAllSelected(status);
+    let icon = status ? faCheckSquare : faSquareFull;
+    setIconSelected(icon);
+    wait(400);
+    updateIcons();
+  };
+
   return (
     <>
       <header className="text-center my-3">
@@ -33,19 +57,29 @@ const Title = (props) => {
             <Col xl={1} role="checkbox" className=" select-all pt-2">
               <Row>
                 <Col xl={1}>
-                  <FontAwesomeIcon
-                    role="checkbox"
-                    icon={faSquare}
-                    aria-label="Select Multiple"
-                    className="icon-big"
-                  />
+                  <div
+                    onClick={selectAll}
+                    className="selectBox"
+                    id="iconContainer"
+                  >
+                    <a id="clicker" href="#link">
+                      <FontAwesomeIcon
+                        role="checkbox"
+                        icon={iconSelected}
+                        aria-label="Select Multiple"
+                        className="icon-big text-light"
+                      />
+                    </a>
+                  </div>
                 </Col>
                 <Col xl={1}>
-                  <FontAwesomeIcon
-                    icon={faCaretDown}
-                    aria-label="Select Multiple"
-                    className="icon-big"
-                  />
+                  <div>
+                    <FontAwesomeIcon
+                      icon={faCaretDown}
+                      aria-label="Select Multiple"
+                      className="icon-big"
+                    />
+                  </div>
                 </Col>
               </Row>
             </Col>
@@ -102,6 +136,4 @@ const Title = (props) => {
       </header>
     </>
   );
-};
-
-export default Title;
+}

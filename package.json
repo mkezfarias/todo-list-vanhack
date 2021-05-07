@@ -16,6 +16,7 @@
     "react-scripts": "4.0.3",
     "sass": "^1.32.12",
     "sass-loader": "^11.0.1",
+    "waait": "^1.0.5",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

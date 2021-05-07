@@ -32,7 +32,7 @@ const Search = () => {
           </Button>
         </Form>
       </Row>
-      <hr size="6" class="bg-warning" />
+      <hr size="6" className="bg-warning" />
     </>
   );
 };
