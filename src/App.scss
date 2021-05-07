@@ -82,7 +82,7 @@ i {
 }
 
 .icon-big {
-  font-size: 20px !important;
+  font-size: 25px !important;
   margin-right: 10px;
 }
 
@@ -132,19 +132,16 @@ i {
   padding: 10px;
 }
 
-.top-row{
-  border-radius: 6px;
-  background: #fafafa;
+.box-shadow{
   -moz-box-shadow:  6px 6px 10px #dadada,
                    -6px -6px 10px #ffffff;
   -webkit-box-shadow: 6px 6px 10px #dadada,
                -6px -6px 10px #ffffff;
   box-shadow:  6px 6px 10px #dadada,
                -6px -6px 10px #ffffff;
-  margin-top: 10px;
 }
 
-input:focus, input.form-control:focus {
+input:focus, input.form-control:focus, button:focus, button.form-control:focus {
   outline:none !important;
   outline-width: 0 !important;
   -moz-box-shadow: none;

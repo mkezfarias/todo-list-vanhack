@@ -23,7 +23,11 @@ const Search = () => {
             placeholder="Search"
             aria-label="Search"
           />
-          <Button variant="boutline-secondary" type="submit">
+          <Button
+            variant="outline-secondary"
+            className="border-0 "
+            type="submit"
+          >
             Go
           </Button>
         </Form>
