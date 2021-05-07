@@ -1,84 +1,162 @@
-.App {
-  text-align: center;
+
+/* Remove default padding */
+ul[class],
+ol[class] {
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-content {
-  background-color: #61dafb;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-form input {
-  height: 26px;
-  border-radius: 5%;
-  display: flex;
-  vertical-align: auto;
-}
-
-form button {
-  cursor: pointer;
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  margin: 2px 0;
-  border: solid 1px transparent;
-  border-radius: 4px;
-  padding: 0.5em 1em;
-  color: #ffffff;
-  background-color: darkgreen;
-  height: 30px;
-  width: 120px;
-}
-
-h3 {
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
   margin: 0;
 }
 
-.list {
-  display: flex;
-  margin: 5px;
-  flex-direction: row;
-  align-items: flex-end;
+/* Set core body defaults */
+body {
+  background: #fafafa;
+  font-family: 'Quicksand', sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
 }
 
-.btn-delete {
-  cursor: pointer;
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  border: solid 1px transparent;
-  border-radius: 4px;
-  color: #ffffff;
-  background-color: red;
-  height: 30px;
-  width: 30px;
+/* Remove list styles on ul, ol elements with a class attribute */
+ul[class],
+ol[class] {
+  list-style: none;
 }
+
+
+/* Make images easier to work with */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* Inherit fonts for inputs and buttons */
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* colors not included in bootstrap. Hence the !important*/
+.text-gray {
+  color: rgb(156, 156, 156) !important;
+}
+
+/* custom classes */
+
+i {
+  font-size: 20px;
+}
+
+.icon {
+  opacity: 100%;
+  transition-duration: .5s;
+  transition-timing-function: cubic-bezier(0.4,0.0,0.2,1);
+  background-size: 20px;
+  background-color:rgb(255, 255, 255);
+  color:rgb(24, 23, 23);
+  border-radius: 50%;
+}
+
+.icon:hover {
+  opacity: 90%;
+  transition-duration: .5s;
+  transition-timing-function: cubic-bezier(0.4,0.0,0.2,1);
+  color:rgb(250, 184, 2);
+  border-radius: 50%;
+  transform: scale(1.2);
+}
+
+
+.logo-text{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.logo-icon{
+    font-size: 1.5rem;
+}
+
+.search-input, input.search-input{
+  font-style: italic;
+  text-align: center;
+  border: none;
+  padding: 25px 5px;
+  height: 2rem !important;
+  background-color: rgb(245, 241, 241);
+  transition: ease-in-out;
+  transition-duration: 600ms;
+}
+
+.todo-item {
+  border-radius: 6px;
+  background: #fafafa;
+  -moz-box-shadow:     6px 6px 10px #dadada,
+                      -6px -6px 10px #ffffff;
+  -webkit-box-shadow:  6px 6px 10px #dadada,
+                      -6px -6px 10px #ffffff;
+  box-shadow:  6px 6px 10px #dadada,
+               -6px -6px 10px #ffffff;
+  margin-top: 10px;
+}
+
+.new-todo-input{
+  border-radius: 4px;
+  background: linear-gradient(45deg, #e1e1e1, #ffffff);
+  -moz-box-shadow:    4px -4px 6px #ebebeb,
+                      -4px 4px 6px #ffffff;
+  -webkit-box-shadow: 4px -4px 6px #ebebeb,
+                    -4px 4px 6px #ffffff;
+  box-shadow:  4px -4px 6px #ebebeb,
+               -4px 4px 6px #ffffff;
+  padding: 10px;
+}
+
+.top-row{
+  border-radius: 6px;
+  background: #fafafa;
+  -moz-box-shadow:  6px 6px 10px #dadada,
+                   -6px -6px 10px #ffffff;
+  -webkit-box-shadow: 6px 6px 10px #dadada,
+               -6px -6px 10px #ffffff;
+  box-shadow:  6px 6px 10px #dadada,
+               -6px -6px 10px #ffffff;
+  margin-top: 10px;
+}
+
+input:focus, .form-control:focus {
+  outline:none !important;
+  outline-width: 0 !important;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;;
+  background-color: white;
+  color: rgb(68, 68, 67);
+  transition: ease-in-out;
+  transition-duration: 400ms;
+}
+
+hr {
+  color: rgb(255, 187, 0);
+  border: none;
+}
+
+    
+    

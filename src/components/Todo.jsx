@@ -1,9 +1,12 @@
 import React from 'react'
+import { Container, Col, Row, Button } from "react-bootstrap";
 
 
-const Todo = () => {
+const Todo = ({todo}) => {
     return (
-        <h1>Todo component</h1>
+      <>
+        <h3>{todo}</h3>
+      </>
     )
 }
 
