@@ -1,70 +1,85 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Sustainalytics Take Home Test - PAGINATED TO-DO LIST
 
-## Available Scripts
+#### LET'S DO IT APP for TO-DO Management. 
+The website includes serverless backend.
+Stack: React, JavaScript, Firebase, HTML, CSS, Bootstrap, SAAS
 
-In the project directory, you can run:
+#### Screenshots
+<img src="https://i.imgur.com/bxiB1Fo.png">
 
-### `yarn start`
+## Packages 
+- react-bootstrap (for styles)
+- firebase-tools
+- waait (for Promises)
+- sass (for styles)
+- eslint (for code consistency)
+- fontawesome (for icons)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🚀 Quick start
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1.  **Clone the repo locally**
 
-### `yarn test`
+    from the command line
+    ```sh
+    #to create your parent directory
+    $ mkdir projects
+    $ cd projects
+    $ git clone git@github.com:mkezmkez/todo-list-vanhack.git
+    $ cd todo-list-vanhack
+    ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2.  **Installs**
 
-### `yarn build`
+    Make sure you are in todo-list-vanhack folder, and you have yarn and npm installed in your system
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    
+    ```sh
+    #To install all the dependencies and npm modules
+    $ yarn install
+    ```
+    
+    
+    ```sh
+    To run the app locally    
+    $ yarn start
+    ```
+    
+    Your site is now running at `http://localhost:3000`! Open your browser and go to localhost:3000 to see it live, it will reload when you make changes
+    
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3.  **Git**
+    - The code is in GitHub, in this repository https://github.com/mkezmkez/todo-list-vanhack
+    - The default branch is ```development```, the production branch is ```main ```. All features were developed in different branches (e.g.  ```feature/styles``` which were kept for version control.
+    - You may find he commit hitory here https://github.com/mkezmkez/todo-list-vanhack/commits/development
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4.  **Disclaimers**
+    - I decided to go for a minimalistic style with some hints of colors keeping the color palette consistent
+    - The API keys are published on the repository intentionally for your convenience. The API keys were restricted for https://localhost:3000 and https://vanhack-bdc0a.web.app/
+    - There are known minor bugs in the app, I was unable to fix them due to time constrains, hence they are in the roadmap
+    - The code is not optimally organized. I wish I had more time to apply the DRY principle
+    - State was kept on the server for data persistance across browsers / sessions
 
-### `yarn eject`
+5.  **Roadmap**
+    - TO-DOS
+      - Fix UNCOMPLETE ALL
+      - Add case-insensitive search
+      - Add a RESET button to reload all TODOS fter completing a query
+      - Refactor code
+      - Reorganize code to apply DRY
+      - End to end testing
+      - Restyle the GO button
+    - ENABLE CHANGE USER BUTTON
+    - ENABLE GOOGLE AUTHENTICATION FOR SESSION KEEPING
+    - ADD ORDER DESCENDING AND ASCENDING FEATURE
+    - ADD SNOOZE BUTTON TO MOVE TASKS TO THE END OF THE LIST
+    - MAKE LOGO CLICKABLE WITH A LINK TO /INDEX
+    - FILTER BY COMPLETED / DELETED / UPCOMING
+    - TEST FOR ACCESSIBILITY
+    - ADD HOVER TAGS FOR ICONS TO REVEAL THEIR FUNCTIONALITY
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+6.  **Thank You**
+    I'm happy to have completed this assignment for Sustainalytics trough Vanhack, it energized me and motivated me tons.
+    Special thanks to Cecilia for your support.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    
