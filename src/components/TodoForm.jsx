@@ -33,14 +33,12 @@ const TodoForm = () => {
             id: doc.id,
             ...doc.data(),
           }));
-          if (todosList.length <= 1) {
-            return;
-          } else {
-            setTodos(todosList);
-            setLastVisible(todosList[todosList.length - 1].created_at);
-            setFirstVisible(todosList[0].created_at);
-            console.log(firstVisible);
-          }
+          setTodos(todosList);
+          setLastVisible(
+            todosList.length > 0 && todosList[todosList.length - 1].created_at
+          );
+          setFirstVisible(todosList.length > 0 && todosList[0].created_at);
+          console.log(firstVisible);
         });
     })();
   }, []);
@@ -155,7 +153,7 @@ const TodoForm = () => {
 
       <h1 className="fs-3 text-black-50 m-auto text-center py-4 py-md-3">
         {name.toUpperCase()}
-        {name[name.length - 1] === "S" ? "'" : "'S"} TO DO LIST
+        {name[name.length - 1] === "s" ? "'" : "'S"} TO DO LIST
       </h1>
       <Container>
         <Row>
