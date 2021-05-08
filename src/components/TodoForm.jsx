@@ -33,14 +33,12 @@ const TodoForm = () => {
             id: doc.id,
             ...doc.data(),
           }));
-          if (todosList.length <= 1) {
-            return;
-          } else {
-            setTodos(todosList);
-            setLastVisible(todosList[todosList.length - 1].created_at);
-            setFirstVisible(todosList[0].created_at);
-            console.log(firstVisible);
-          }
+          setTodos(todosList);
+          setLastVisible(
+            todosList.length > 0 && todosList[todosList.length - 1].created_at
+          );
+          setFirstVisible(todosList.length > 0 && todosList[0].created_at);
+          console.log(firstVisible);
         });
     })();
   }, []);
