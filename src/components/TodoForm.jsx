@@ -3,6 +3,8 @@ import { Container, Col, Row, Button, Form } from "react-bootstrap";
 import Todo from "./Todo";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { firestore, firebase } from "../firebase";
+
 import "./../App.scss";
 
 const TodoForm = () => {
@@ -14,40 +16,50 @@ const TodoForm = () => {
   ]);
 
   useEffect(() => {
-    (function checkTodos() {
-      const allTodos = JSON.parse(localStorage.getItem("todos"));
-      setTodos(allTodos);
+    let unsubscribeFromReportes = null;
+
+    (async function fetchReportes() {
+      unsubscribeFromReportes = await firestore
+        .collection("todos")
+        .limit(10)
+        .onSnapshot((snapshot) => {
+          let todosList = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setTodos(todosList);
+        });
     })();
   }, []);
 
-  const saveInLocalStorage = (itemTosave) =>
-    localStorage.setItem("todos", JSON.stringify(itemTosave));
+  const handleOnchange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setTodo({
+      [name]: value,
+      selected: false,
+      completed: false,
+      created_at: Date.now(),
+    });
+  };
 
-  const getFromLocalStorage = () => JSON.parse(localStorage.getItem("todos"));
-
-  const handleOnchange = (e) =>
-    setTodo({ [e.target.name]: e.target.value, selected: false });
-
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (Object.keys(todo).length === 0 || todo.content.trim() === "") return;
-    setTodos([...todos, todo]);
-    saveInLocalStorage([...todos, todo]);
+
+    await firestore.collection("todos").add(todo);
     e.target.firstElementChild.value = "";
+  }
+
+  const deleteTodo = async (id) => {
+    const todoToDelete = await firestore.collection("todos").doc(id).delete();
   };
 
-  const deleteTodo = (idx) => {
-    const newTodos = [...todos];
-    newTodos.splice(idx, 1);
-    setTodos(newTodos);
-    saveInLocalStorage(newTodos);
-  };
-
-  const markCompleted = (idx) => {
-    let todosToUpdate = [...todos];
-    todosToUpdate[idx].completed = true;
-    saveInLocalStorage(todosToUpdate);
-    console.log(getFromLocalStorage());
+  const markCompleted = async (id) => {
+    const todoToDelete = await firestore
+      .collection("todos")
+      .doc(id)
+      .update({ completed: true });
   };
 
   return (
@@ -61,8 +73,9 @@ const TodoForm = () => {
               selected={item.selected}
               key={idx}
               index={idx}
-              deleteTodo={() => deleteTodo(idx)}
+              deleteTodo={() => deleteTodo(item.id)}
               completed={item.completed}
+              id={item.id}
             />
           ))}
         </Col>

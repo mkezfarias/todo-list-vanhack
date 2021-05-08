@@ -18,22 +18,22 @@ const Todo = ({
   index,
   deleteTodo,
   markCompleted,
+  id,
 }) => {
   const [isSelected, setIsSelected] = useState(false);
   const [isCompleted, setIsCompleted] = useState(completed);
   const [globalStatus, setGlobalStatus] = useState(false);
 
   const toggleStatus = (e, status) => {
+    console.log("completed", completed, "selected", selected);
     if (status === "selected") {
       let selected = !isSelected;
       setIsSelected(selected);
       selected = !isSelected;
-      console.log("selected", e.target);
     } else if (status == "completed") {
       let statusCompleted = !isCompleted;
       setIsCompleted(statusCompleted);
       completed = !isCompleted;
-      console.log(e.target);
     }
   };
 
@@ -80,13 +80,16 @@ const Todo = ({
           </Col>
           <Col xl={1} className="todo-text">
             <div>{todo}</div>
+            <div>{id}</div>
+            <div>{selected}</div>
+            <div>{completed}</div>
           </Col>
           <Col xl={1} className="individual-actions " id="hovered-actions">
             <FontAwesomeIcon
               role="checkbox"
               icon={faTrashAlt}
               aria-label="Delete Item"
-              onClick={deleteTodo}
+              onClick={() => deleteTodo(todo.id)}
               className="icon icon-big "
             />
             <FontAwesomeIcon
