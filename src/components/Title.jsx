@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Col,
@@ -21,52 +21,74 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./../App.scss";
+import { firestore, firebase } from "../firebase";
 import wait from "waait";
 
 export default function Title(props) {
   const [allSelected, setAllSelected] = useState(false);
   const [iconSelected, setIconSelected] = useState(faSquareFull);
+  const [todos, setTodos] = useState([]);
 
-  const selectAll = (e) => {
-    let status = !allSelected;
-    setAllSelected(status);
-    let icon = status ? faCheckSquare : faSquareFull;
-    setIconSelected(icon);
+  useEffect(() => {
+    let unsubscribeFromTodos = null;
+    (async function fetchTodos() {
+      unsubscribeFromTodos = await firestore
+        .collection("todos")
+        .onSnapshot((snapshot) => {
+          let todosList = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setTodos(todosList);
+        });
+    })();
+    return () => unsubscribeFromTodos();
+  }, [allSelected]);
 
-    let allItems = JSON.parse(window.localStorage.getItem("todos"));
+  async function toggleAll() {
+    setAllSelected(!allSelected);
+    todos.forEach((todo) => {
+      wait(200);
+      firestore
+        .collection("todos")
+        .doc(todo.id)
+        .update({ selected: !allSelected });
+    });
+  }
 
-    if (status) {
-      allItems.map((item) => (item.selected = true));
-      console.log(allItems);
-      localStorage.setItem("globalStatus", status);
-    } else {
-      allItems.map((item) => (item.selected = false));
-      console.log(allItems);
-      localStorage.setItem("globalStatus", status);
-    }
-  };
+  function deleteSelected() {
+    let selectedTodos = todos.filter((todo) => todo.selected);
+    selectedTodos.forEach((todo) => {
+      const todoToDelete = firestore.collection("todos").doc(todo.id).delete();
+    });
+  }
 
+  function completeSelected() {
+    let selectedTodos = todos.filter((todo) => todo.selected);
+    selectedTodos.forEach((todo) => {
+      const todoToComplete = firestore
+        .collection("todos")
+        .doc(todo.id)
+        .update({ completed: true });
+    });
+  }
   return (
     <>
       <header className="text-center my-3">
-        <h1 className="fs-5 text-black-50">
-          {props.name}
-          {props.name[props.name.length - 1] === "S" ? "'" : "'S"} TO DO LIST
-        </h1>
         <Container>
           <Row className="bg-warning rounded-top box-shadow py-2">
             <Col xl={1} role="checkbox" className=" select-all pt-2">
               <Row>
                 <Col xl={1}>
                   <div
-                    onClick={selectAll}
+                    onClick={toggleAll}
                     className="selectBox"
                     id="iconContainer"
                   >
                     <a id="clicker" href="#link">
                       <FontAwesomeIcon
                         role="checkbox"
-                        icon={iconSelected}
+                        icon={allSelected ? faCheckSquare : faSquare}
                         aria-label="Select Multiple"
                         className="icon-big text-light"
                       />
@@ -88,13 +110,6 @@ export default function Title(props) {
               <Row>
                 <Col xl={3}>
                   <FontAwesomeIcon
-                    icon={faTrash}
-                    aria-label="Delete Selected"
-                    className="icon-big"
-                  />
-                </Col>
-                <Col xl={3}>
-                  <FontAwesomeIcon
                     icon={faCheckCircle}
                     aria-label="Complete Selected"
                     className="icon-big"
@@ -102,9 +117,10 @@ export default function Title(props) {
                 </Col>
                 <Col xl={3}>
                   <FontAwesomeIcon
-                    icon={faClock}
-                    aria-label="Snooze Selected"
+                    icon={faTrash}
+                    aria-label="Delete Selected"
                     className="icon-big"
+                    onClick={deleteSelected}
                   />
                 </Col>
               </Row>

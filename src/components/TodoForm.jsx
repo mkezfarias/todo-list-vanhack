@@ -6,14 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { firestore, firebase } from "../firebase";
 
 import "./../App.scss";
+import Title from "./Title";
+import Search from "./Search";
 
 const TodoForm = () => {
   const [todo, setTodo] = useState({});
-  const [todos, setTodos] = useState([
-    { content: "DO THIS", selected: false },
-    { content: "DO THAT", selected: false },
-    { content: "HIRE LUIS", selected: false },
-  ]);
+  const [todos, setTodos] = useState([]);
+  const [lastVisible, setLastVisible] = useState(null);
 
   useEffect(() => {
     let unsubscribeFromReportes = null;
@@ -40,6 +39,7 @@ const TodoForm = () => {
       selected: false,
       completed: false,
       created_at: Date.now(),
+      searchArray: value.split(" "),
     });
   };
 
@@ -55,30 +55,44 @@ const TodoForm = () => {
     const todoToDelete = await firestore.collection("todos").doc(id).delete();
   };
 
-  const markCompleted = async (id) => {
-    const todoToDelete = await firestore
+  const toggleSelected = async (id) => {
+    let status = null;
+    await firestore
       .collection("todos")
       .doc(id)
-      .update({ completed: true });
+      .get()
+      .then((resp) => (status = resp.data().selected));
+    console.log("item", status);
+    let toggled = await firestore
+      .collection("todos")
+      .doc(id)
+      .update({ selected: !status });
   };
 
+  const toggleCompleted = async (id) => {
+    let status = null;
+    await firestore
+      .collection("todos")
+      .doc(id)
+      .get()
+      .then((resp) => (status = resp.data().completed));
+    console.log("item", status);
+    let toggled = await firestore
+      .collection("todos")
+      .doc(id)
+      .update({ completed: !status });
+  };
+
+  const name = "sustainalytics";
   return (
     <>
+      <Search setTodos={setTodos} setLastVisible={setLastVisible} />
+
+      <h1 className="fs-5 text-black-50 m-auto text-center">
+        {name.toUpperCase()}
+        {name[name.length - 1] === "S" ? "'" : "'S"} TO DO LIST
+      </h1>
       <Container>
-        <Col className="list-of-todos main-container">
-          {todos.map((item, idx) => (
-            <Todo
-              todo={item.content}
-              markCompleted={() => markCompleted(idx)}
-              selected={item.selected}
-              key={idx}
-              index={idx}
-              deleteTodo={() => deleteTodo(item.id)}
-              completed={item.completed}
-              id={item.id}
-            />
-          ))}
-        </Col>
         <Form
           className="d-flex flex-row align-items-center"
           onSubmit={handleSubmit}
@@ -100,6 +114,26 @@ const TodoForm = () => {
             <FontAwesomeIcon icon={faPlusCircle} />{" "}
           </Button>
         </Form>
+      </Container>
+      <Title name={name.toUpperCase()} />
+
+      <Container>
+        <Col className="list-of-todos main-container">
+          {todos.map((item, idx) => (
+            <Todo
+              todo={item.content}
+              //markCompleted={() => markCompleted(item.id)}
+              selected={item.selected}
+              key={idx}
+              index={idx}
+              deleteTodo={() => deleteTodo(item.id)}
+              completed={item.completed}
+              id={item.id}
+              toggleSelected={() => toggleSelected(item.id)}
+              toggleCompleted={() => toggleCompleted(item.id)}
+            />
+          ))}
+        </Col>
       </Container>
     </>
   );
