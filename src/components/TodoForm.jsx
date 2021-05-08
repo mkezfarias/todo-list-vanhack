@@ -153,7 +153,7 @@ const TodoForm = () => {
 
       <h1 className="fs-3 text-black-50 m-auto text-center py-4 py-md-3">
         {name.toUpperCase()}
-        {name[name.length - 1] === "S" ? "'" : "'S"} TO DO LIST
+        {name[name.length - 1] === "s" ? "'" : "'S"} TO DO LIST
       </h1>
       <Container>
         <Row>

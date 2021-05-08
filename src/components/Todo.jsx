@@ -45,7 +45,9 @@ const Todo = ({
   return (
     <>
       <Row
-        className={completed ? "todo-item py-3 bg-completed" : "todo-item py-3"}
+        className={
+          completed ? "todo-item pt-3 mt-2 bg-completed" : "mt-2 todo-item py-3"
+        }
       >
         <Row className="sidebar">
           <Col xl={1} md={1} xs={1} className="individualSelected">
