@@ -4,9 +4,11 @@
 #### LET'S DO IT APP for TO-DO Management. 
 The website includes serverless backend.
 Stack: React, JavaScript, Firebase, HTML, CSS, Bootstrap, SAAS
-<br><br><br>
+<br>
+<a href="https://www.notion.so/TO-DO-LIST-SUSTAINALYTICS-c9048e2be2c144b486ff04c561349f67"><img src="https://user-images.githubusercontent.com/51313750/117556225-38a02100-b02c-11eb-83c6-3bc4b47928f0.png" alt="drawing" width="20" ></img></a>
+[ You can read all about my process to build it in this Notion document](https://www.notion.so/TO-DO-LIST-SUSTAINALYTICS-c9048e2be2c144b486ff04c561349f67)
 
-
+<br>
 
 ## 📦 Packages 
 - react-bootstrap (for styles)
