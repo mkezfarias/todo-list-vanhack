@@ -27,22 +27,23 @@ export default function Title(props) {
   const [allSelected, setAllSelected] = useState(false);
   const [iconSelected, setIconSelected] = useState(faSquareFull);
 
-  const updateIcons = (e) => {
-    let squares = document.querySelectorAll(".individualSelected");
-    console.log(squares);
-    squares.forEach((square) => {
-      square.firstElementChild.classList.toggle("text-warning");
-      square.firstElementChild.classList.toggle("selectedSquare");
-    });
-  };
-
   const selectAll = (e) => {
     let status = !allSelected;
     setAllSelected(status);
     let icon = status ? faCheckSquare : faSquareFull;
     setIconSelected(icon);
-    wait(400);
-    updateIcons();
+
+    let allItems = JSON.parse(window.localStorage.getItem("todos"));
+
+    if (status) {
+      allItems.map((item) => (item.selected = true));
+      console.log(allItems);
+      localStorage.setItem("globalStatus", status);
+    } else {
+      allItems.map((item) => (item.selected = false));
+      console.log(allItems);
+      localStorage.setItem("globalStatus", status);
+    }
   };
 
   return (

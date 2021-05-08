@@ -14,19 +14,16 @@ const TodoForm = () => {
   ]);
 
   useEffect(() => {
-    const checkTodos = () => {
+    (function checkTodos() {
       const allTodos = JSON.parse(localStorage.getItem("todos"));
-      if (allTodos) {
-        setTodos(allTodos);
-        console.log(allTodos);
-      }
-    };
-    window.addEventListener("storage", checkTodos);
-
-    return () => {
-      window.removeEventListener("storage", checkTodos);
-    };
+      setTodos(allTodos);
+    })();
   }, []);
+
+  const saveInLocalStorage = (itemTosave) =>
+    localStorage.setItem("todos", JSON.stringify(itemTosave));
+
+  const getFromLocalStorage = () => JSON.parse(localStorage.getItem("todos"));
 
   const handleOnchange = (e) =>
     setTodo({ [e.target.name]: e.target.value, selected: false });
@@ -35,15 +32,22 @@ const TodoForm = () => {
     e.preventDefault();
     if (Object.keys(todo).length === 0 || todo.content.trim() === "") return;
     setTodos([...todos, todo]);
-    console.log(todo);
-    localStorage.setItem("todos", [...todos, todo]);
-    console.log([...todos, todo]);
+    saveInLocalStorage([...todos, todo]);
+    e.target.firstElementChild.value = "";
   };
 
   const deleteTodo = (idx) => {
     const newTodos = [...todos];
     newTodos.splice(idx, 1);
     setTodos(newTodos);
+    saveInLocalStorage(newTodos);
+  };
+
+  const markCompleted = (idx) => {
+    let todosToUpdate = [...todos];
+    todosToUpdate[idx].completed = true;
+    saveInLocalStorage(todosToUpdate);
+    console.log(getFromLocalStorage());
   };
 
   return (
@@ -53,10 +57,12 @@ const TodoForm = () => {
           {todos.map((item, idx) => (
             <Todo
               todo={item.content}
+              markCompleted={() => markCompleted(idx)}
               selected={item.selected}
               key={idx}
               index={idx}
-              deleteTodo={deleteTodo}
+              deleteTodo={() => deleteTodo(idx)}
+              completed={item.completed}
             />
           ))}
         </Col>

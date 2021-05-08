@@ -1,36 +1,82 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Col, Row, Button } from "react-bootstrap";
 import {
   faSquare,
   faTrashAlt,
   faCheckCircle,
   faClock,
+  faSquareFull,
+  faCheckSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./../App.scss";
 
-const Todo = ({ todo, selected, index, deleteTodo }) => {
+const Todo = ({
+  todo,
+  selected,
+  completed,
+  index,
+  deleteTodo,
+  markCompleted,
+}) => {
   const [isSelected, setIsSelected] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(completed);
+  const [globalStatus, setGlobalStatus] = useState(false);
+
+  const toggleStatus = (e, status) => {
+    if (status === "selected") {
+      let selected = !isSelected;
+      setIsSelected(selected);
+      selected = !isSelected;
+      console.log("selected", e.target);
+    } else if (status == "completed") {
+      let statusCompleted = !isCompleted;
+      setIsCompleted(statusCompleted);
+      completed = !isCompleted;
+      console.log(e.target);
+    }
+  };
 
   const toggleSelected = (e) => {
-    let statusSelected = !isSelected;
-    setIsSelected(statusSelected);
-    selected = !isSelected;
-    console.log(e.target);
+    let selected = !isSelected;
+    let items = JSON.parse(window.localStorage.getItem("todos"));
+    items[index].selected = !isSelected;
+    window.localStorage.setItem("todos", items);
   };
+
+  useEffect(() => {
+    function updateStatus() {
+      let status = JSON.parse(window.localStorage.getItem("todos"));
+      setIsSelected(status[index].selected);
+      console.log(status[index].selected);
+    }
+
+    window.addEventListener("storage", updateStatus);
+
+    return () => {
+      window.removeEventListener("storage", updateStatus);
+    };
+  }, [isSelected]);
 
   return (
     <>
       <Row className="todo-item py-3">
         <Row className="sidebar">
           <Col xl={1} className="individualSelected">
-            <FontAwesomeIcon
-              role="checkbox"
-              icon={faSquare}
-              aria-label="Select Individual"
-              className={isSelected ? "icon icon-big" : "icon-big"}
+            <div
               onClick={toggleSelected}
-            />
+              className="selectBox"
+              id="iconContainer"
+            >
+              <a className="clicker" id="clicker" href="#link">
+                <FontAwesomeIcon
+                  role="checkbox"
+                  icon={isSelected ? faSquareFull : faCheckSquare}
+                  aria-label="Select Individual"
+                  className="icon icon-big"
+                />
+              </a>
+            </div>
           </Col>
           <Col xl={1} className="todo-text">
             <div>{todo}</div>
@@ -46,8 +92,9 @@ const Todo = ({ todo, selected, index, deleteTodo }) => {
             <FontAwesomeIcon
               role="checkbox"
               icon={faCheckCircle}
+              onClick={(e) => toggleStatus(e, "completed")}
               aria-label="Mark Completed"
-              className="icon icon-big"
+              className={isCompleted ? "icon icon-big" : "icon-big text-danger"}
             />
             <FontAwesomeIcon
               role="checkbox"
