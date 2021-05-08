@@ -192,6 +192,10 @@ input:focus, input.form-control:focus, button:focus, button.form-control:focus {
   background-color: #eee;
 }
 
+.bg-completed {
+  background-color: rgb(253, 255, 164);
+}
+
 hr {
   color: rgb(255, 187, 0);
   border: none;

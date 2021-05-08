@@ -44,9 +44,11 @@ const Todo = ({
 
   return (
     <>
-      <Row className="todo-item py-3">
+      <Row
+        className={completed ? "todo-item py-3 bg-completed" : "todo-item py-3"}
+      >
         <Row className="sidebar">
-          <Col xl={1} className="individualSelected">
+          <Col xl={1} md={1} xs={1} className="individualSelected">
             <div
               onClick={toggleSelected}
               className="selectBox"
@@ -62,24 +64,40 @@ const Todo = ({
               </a>
             </div>
           </Col>
-          <Col xl={9} className="todo-text py-1">
-            <div>{todo}</div>
+          <Col xl={9} md={9} xs={8} className="todo-text py-1">
+            <div className={completed ? "text-decoration-line-through" : null}>
+              {todo}
+            </div>
           </Col>
-          <Col xl={1} className="individual-actions " id="hovered-actions">
-            <FontAwesomeIcon
-              role="checkbox"
-              icon={faCheckCircle}
-              onClick={toggleCompleted}
-              aria-label="Mark Completed"
-              className={completed ? "icon-big text-warning" : "icon icon-big"}
-            />
-            <FontAwesomeIcon
-              role="checkbox"
-              icon={faTrashAlt}
-              aria-label="Delete Item"
-              onClick={() => deleteTodo(todo.id)}
-              className="icon icon-big "
-            />
+          <Col
+            xl={1}
+            md={1}
+            xs={3}
+            className="individual-actions "
+            id="hovered-actions"
+          >
+            <Row>
+              <Col md={6} xs={6}>
+                <FontAwesomeIcon
+                  role="checkbox"
+                  icon={faCheckCircle}
+                  onClick={toggleCompleted}
+                  aria-label="Mark Completed"
+                  className={
+                    completed ? "icon-big text-warning" : "icon-big text-dark"
+                  }
+                />
+              </Col>
+              <Col md={6} xs={6}>
+                <FontAwesomeIcon
+                  role="checkbox"
+                  icon={faTrashAlt}
+                  aria-label="Delete Item"
+                  onClick={() => deleteTodo(todo.id)}
+                  className="icon icon-big "
+                />
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Row>

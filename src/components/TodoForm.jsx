@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Container, Col, Row, Button, Form } from "react-bootstrap";
 import Todo from "./Todo";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faNetworkWired,
+  faPlusCircle,
+  faSadCry,
+  faCaretRight,
+  faCaretLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { firestore, firebase } from "../firebase";
-
 import "./../App.scss";
 import Title from "./Title";
 import Search from "./Search";
@@ -12,25 +17,86 @@ import Search from "./Search";
 const TodoForm = () => {
   const [todo, setTodo] = useState({});
   const [todos, setTodos] = useState([]);
-  const [lastVisible, setLastVisible] = useState(null);
-
+  const [lastVisible, setLastVisible] = useState(0);
+  const [firstVisible, setFirstVisible] = useState(0);
+  const [val, setVal] = useState("");
   useEffect(() => {
-    let unsubscribeFromReportes = null;
+    let unsubscribeFromTodos = null;
 
-    (async function fetchReportes() {
-      unsubscribeFromReportes = await firestore
+    (async function fetchTodos() {
+      unsubscribeFromTodos = await firestore
         .collection("todos")
+        .orderBy("created_at", "desc")
         .limit(10)
         .onSnapshot((snapshot) => {
           let todosList = snapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
           }));
-          setTodos(todosList);
+          if (todosList.length <= 1) {
+            return;
+          } else {
+            setTodos(todosList);
+            setLastVisible(todosList[todosList.length - 1].created_at);
+            setFirstVisible(todosList[0].created_at);
+            console.log(firstVisible);
+          }
         });
     })();
   }, []);
 
+  const nextPage = () => {
+    if (todos.length < 10) return;
+    let unsubscribeFromTodos = null;
+
+    (async function fetchTodos() {
+      unsubscribeFromTodos = await firestore
+        .collection("todos")
+        .orderBy("created_at", "desc")
+        .limit(10)
+        .startAfter(lastVisible)
+        .onSnapshot((snapshot) => {
+          let todosList = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          if (todosList.length <= 1) {
+            return;
+          } else {
+            setTodos(todosList);
+            setLastVisible(todosList[todosList.length - 1].created_at);
+            setFirstVisible(todosList[0].created_at);
+            console.log(firstVisible);
+          }
+        });
+    })();
+  };
+
+  const prevPage = () => {
+    let unsubscribeFromTodos = null;
+
+    (async function fetchTodos() {
+      unsubscribeFromTodos = await firestore
+        .collection("todos")
+        .orderBy("created_at", "desc")
+        .limit(10)
+        .endBefore(firstVisible)
+        .onSnapshot((snapshot) => {
+          let todosList = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          if (todosList.length <= 1) {
+            return;
+          } else {
+            setTodos(todosList);
+            setLastVisible(todosList[todosList.length - 1].created_at);
+            setFirstVisible(todosList[0].created_at);
+            console.log(firstVisible);
+          }
+        });
+    })();
+  };
   const handleOnchange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -76,7 +142,6 @@ const TodoForm = () => {
       .doc(id)
       .get()
       .then((resp) => (status = resp.data().completed));
-    console.log("item", status);
     let toggled = await firestore
       .collection("todos")
       .doc(id)
@@ -86,34 +151,59 @@ const TodoForm = () => {
   const name = "sustainalytics";
   return (
     <>
-      <Search setTodos={setTodos} setLastVisible={setLastVisible} />
+      <Search callback={setTodos} />
 
-      <h1 className="fs-5 text-black-50 m-auto text-center">
+      <h1 className="fs-3 text-black-50 m-auto text-center py-4 py-md-3">
         {name.toUpperCase()}
         {name[name.length - 1] === "S" ? "'" : "'S"} TO DO LIST
       </h1>
       <Container>
-        <Form
-          className="d-flex flex-row align-items-center"
-          onSubmit={handleSubmit}
-        >
-          <Form.Control
-            type="input"
-            placeholder="Add a new To-Do"
-            name="content"
-            className="border-0 w-100 todo-item new-todo-inputnombreField"
-            onChange={handleOnchange}
-          />
+        <Row>
+          <Col xl={10} md={9} xs={10}>
+            <Form
+              className="d-flex flex-row align-items-center"
+              onSubmit={handleSubmit}
+            >
+              <Form.Control
+                type="input"
+                placeholder="Add a new To-Do"
+                name="content"
+                className="border-0 w-75 todo-item new-todo-inputnombreField"
+                onChange={handleOnchange}
+              />
 
-          <Button
-            variant="btn-outline-light"
-            className="btn-add-todo  btn border-0 mt-2 new-todo-button"
-            type="submit"
-          >
-            {" "}
-            <FontAwesomeIcon icon={faPlusCircle} />{" "}
-          </Button>
-        </Form>
+              <Button
+                variant="btn-outline-light"
+                className="btn-add-todo  btn border-0 mt-2 new-todo-button"
+                type="submit"
+              >
+                {" "}
+                <FontAwesomeIcon icon={faPlusCircle} />{" "}
+              </Button>
+            </Form>
+          </Col>
+          <Col xl={2} md={3} xs={2} className="text-end py-md-2 py-3">
+            <Row>
+              <Col xl={6} md={5} xs={4}>
+                <FontAwesomeIcon
+                  icon={faCaretLeft}
+                  aria-label="Previous Page"
+                  className="icon-big controls"
+                  onClick={prevPage}
+                />
+              </Col>
+
+              <Col xl={6} md={5} xs={4}>
+                <FontAwesomeIcon
+                  icon={faCaretRight}
+                  aria-label="Next Page"
+                  className="icon-big controls"
+                  onClick={nextPage}
+                />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
       </Container>
       <Title name={name.toUpperCase()} />
 
@@ -122,7 +212,6 @@ const TodoForm = () => {
           {todos.map((item, idx) => (
             <Todo
               todo={item.content}
-              //markCompleted={() => markCompleted(item.id)}
               selected={item.selected}
               key={idx}
               index={idx}

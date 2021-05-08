@@ -77,9 +77,15 @@ export default function Title(props) {
       <header className="text-center my-3">
         <Container>
           <Row className="bg-warning rounded-top box-shadow py-2">
-            <Col xl={1} role="checkbox" className=" select-all pt-2">
+            <Col
+              xl={1}
+              md={1}
+              xs={2}
+              role="checkbox"
+              className=" select-all pt-2"
+            >
               <Row>
-                <Col xl={1}>
+                <Col xl={1} md={1} xs={5}>
                   <div
                     onClick={toggleAll}
                     className="selectBox"
@@ -95,7 +101,12 @@ export default function Title(props) {
                     </a>
                   </div>
                 </Col>
-                <Col xl={1}>
+                <Col
+                  xl={1}
+                  md={1}
+                  xs={7}
+                  className="d-flex flex-row d-md-block"
+                >
                   <div>
                     <FontAwesomeIcon
                       icon={faCaretDown}
@@ -106,16 +117,17 @@ export default function Title(props) {
                 </Col>
               </Row>
             </Col>
-            <Col xl={3} className=" multiple-actions row py-2">
+            <Col xl={3} md={3} xs={5} className=" multiple-actions row py-2">
               <Row>
-                <Col xl={3}>
+                <Col xl={3} md={6} xs={5}>
                   <FontAwesomeIcon
                     icon={faCheckCircle}
                     aria-label="Complete Selected"
                     className="icon-big"
+                    onClick={completeSelected}
                   />
                 </Col>
-                <Col xl={3}>
+                <Col xl={3} md={6} xs={5}>
                   <FontAwesomeIcon
                     icon={faTrash}
                     aria-label="Delete Selected"
@@ -125,29 +137,12 @@ export default function Title(props) {
                 </Col>
               </Row>
             </Col>
-            <Col xl={4} className=" py-2">
-              |
-            </Col>
-            <Col xl={4} className=" pagination-control py-2 text-right ">
-              <Row>
-                <Col xl={2}>
-                  <FontAwesomeIcon
-                    icon={faCaretLeft}
-                    aria-label="Previous Page"
-                    className="icon-big controls"
-                  />
-                </Col>
-                <Col xl={5}>1-10 of 444 </Col>
 
-                <Col xl={2}>
-                  <FontAwesomeIcon
-                    icon={faCaretRight}
-                    aria-label="Next Page"
-                    className="icon-big controls"
-                  />
-                </Col>
-              </Row>
-            </Col>
+            <Col
+              xl={4}
+              md={4}
+              className=" pagination-control py-0 py-md-2 text-right "
+            ></Col>
           </Row>
         </Container>
       </header>

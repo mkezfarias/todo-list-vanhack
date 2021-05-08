@@ -12,23 +12,40 @@ import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./../App.scss";
 import { queryByTitle } from "@testing-library/dom";
-import queryBuilder from "./QueryBuilder";
+import { firestore, firebase } from "../firebase";
 
-const Search = (setTodos, setLastVisible) => {
+const Search = (props) => {
   const [searchTerms, setSearchTerms] = useState("");
 
   const handleOnchange = (e) => setSearchTerms(e.target.value);
-  const runSearch = (e) => {
+
+  const searchByKeyword = (val) => {
+    if (!val) return;
+
+    let todosRef = firestore
+      .collection("todos")
+      .where("searchArray", "array-contains", val)
+      .orderBy("created_at", "desc")
+      .onSnapshot((snapshot) => {
+        let todosList = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        props.callback(todosList);
+      });
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    queryBuilder(searchTerms, setTodos, setLastVisible, null);
+    searchByKeyword(searchTerms);
   };
 
   return (
     <>
-      <Row className="searchbar w-50 m-auto ">
-        <Form className="d-flex" onSubmit={runSearch}>
+      <Row className="searchbar w-md-50 m-auto ">
+        <Form className="d-flex" onSubmit={handleSubmit}>
           <Form.Control
-            className="me-2 search-input border-0"
+            className="me-2 search-input border-0 my-4 mt-md-0"
             type="search"
             placeholder="Search"
             aria-label="Search"
@@ -36,7 +53,7 @@ const Search = (setTodos, setLastVisible) => {
           />
           <Button
             variant="outline-secondary"
-            className="border-0 "
+            className="border-0"
             type="submit"
           >
             Go
