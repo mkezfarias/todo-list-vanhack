@@ -4,6 +4,9 @@
 #### LET'S DO IT APP for TO-DO Management. 
 The website includes serverless backend.
 Stack: React, JavaScript, Firebase, HTML, CSS, Bootstrap, SAAS
+<br><br><br>
+
+
 
 ## 📦 Packages 
 - react-bootstrap (for styles)
@@ -12,10 +15,16 @@ Stack: React, JavaScript, Firebase, HTML, CSS, Bootstrap, SAAS
 - sass (for styles)
 - eslint (for code consistency)
 - fontawesome (for icons)
+<br>
+
 
 ## 💻 Live version
 
-https://vanhack-bdc0a.web.app/
+  You can see the deployed version of the web app on the following domain
+
+  https://vanhack-bdc0a.web.app/
+  
+<br>
 
 ## 🚀 Quick start
 
@@ -51,6 +60,10 @@ https://vanhack-bdc0a.web.app/
     - The default branch is ```development```, the production branch is ```master```. All features were developed in different branches (e.g.  ```feature/styles``` which were kept for version control.
     - You may find he commit hitory here https://github.com/mkezmkez/todo-list-vanhack/commits/development
 
+<br>
+
+
+
 ## ⚠️ Disclaimers
   - The design might look plain. I decided to go for a minimalistic style with some hints of colors keeping the color palette consistent
   - The database rules are set to test mode (unsecured) intentionally and will be open until Jun 9th 2021
@@ -62,6 +75,8 @@ https://vanhack-bdc0a.web.app/
   - The code is not optimally organized. I wish I had more time to apply the DRY principle
   - State was kept on the server for data persistance across browsers / sessions
   - console.log() functions were left intentionally for testing purpuses
+<br>
+
 
 
 ## 🚙 Roadmap
@@ -82,7 +97,8 @@ https://vanhack-bdc0a.web.app/
   - FILTER BY COMPLETED / DELETED / UPCOMING
   - TEST FOR ACCESSIBILITY
   - ADD HOVER TAGS FOR ICONS TO REVEAL THEIR FUNCTIONALITY
----
+<br>
+
 
 ## 📲 Screenshots
 ### DESKTOP 
@@ -93,6 +109,9 @@ https://vanhack-bdc0a.web.app/
 
 ### TABLET
 ![image](https://user-images.githubusercontent.com/51313750/117554770-66cb3400-b01f-11eb-9c89-91ca159087a0.png)
+
+<br>
+
 
 ## 🙏 Thank You
    I'm happy to be a candidate for Sustainalytics trough Vanhack, building this project energized me and motivated me tons.
