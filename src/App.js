@@ -5,6 +5,7 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Nav from './components/Nav.jsx';
 import Search from './components/Search.jsx';
+import Title from './components/Title';
 
 
 const  App = () => {
@@ -13,10 +14,7 @@ const  App = () => {
     <div className="App">
       <div className="App-content">
         <Nav />
-        <Search />
-
-        <TodoForm />
-        
+        <TodoForm />  
       </div>
     </div>
   );

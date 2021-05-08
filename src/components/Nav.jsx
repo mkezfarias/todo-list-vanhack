@@ -18,11 +18,11 @@ const Nav = () => {
       className="navbar navbar-expand-lg navbar-light bg-light my-0 w-100"
     >
       <Container fluid className="d-flex justify-content-between">
-        <Col xl={8} offset={1} className="navbar-brand mx-5">
+        <Col xl={8} offset={1} xs={5} className="navbar-brand mx-md-5 mx-2">
           <FontAwesomeIcon icon={faCheckCircle} className="icon icon-big" />
-          <span className="logo-text">LET'S DO IT</span>
+          <span className="logo-text ">LET'S DO IT</span>
         </Col>
-        <Col xl={2}>
+        <Col xl={2} xs={4} className="ml-3 ">
           <a className="nav-link active text-gray" aria-current="page" href="#">
             Change User
           </a>
