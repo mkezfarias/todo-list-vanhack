@@ -17,6 +17,7 @@ Stack: React, JavaScript, Firebase, HTML, CSS, Bootstrap, SAAS
 - sass (for styles)
 - eslint (for code consistency)
 - fontawesome (for icons)
+- percy (testing)
 <br>
 
 
