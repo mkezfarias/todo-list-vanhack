@@ -86,7 +86,9 @@ const Todo = ({
                   onClick={toggleCompleted}
                   aria-label="Mark Completed"
                   className={
-                    completed ? "icon-big text-warning" : "icon-big text-dark"
+                    completed
+                      ? "icon icon-big text-warning"
+                      : "icon icon-big text-dark"
                   }
                 />
               </Col>
@@ -96,7 +98,7 @@ const Todo = ({
                   icon={faTrashAlt}
                   aria-label="Delete Item"
                   onClick={() => deleteTodo(todo.id)}
-                  className="icon icon-big "
+                  className="icon icon-big"
                 />
               </Col>
             </Row>
