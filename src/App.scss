@@ -63,17 +63,14 @@ i {
 }
 
 .icon {
-  opacity: 100%;
   transition-duration: .5s;
   transition-timing-function: cubic-bezier(0.4,0.0,0.2,1);
   background-size: 20px;
-  background-color:rgb(255, 255, 255);
   color:rgb(24, 23, 23);
   border-radius: 50%;
 }
 
 .icon:hover {
-  opacity: 90%;
   transition-duration: .5s;
   transition-timing-function: cubic-bezier(0.4,0.0,0.2,1);
   color:rgb(250, 184, 2);

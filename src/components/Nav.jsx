@@ -19,12 +19,14 @@ const Nav = () => {
     >
       <Container fluid className="d-flex justify-content-between">
         <Col xl={8} offset={1} xs={5} className="navbar-brand mx-md-5 mx-2">
-          <FontAwesomeIcon icon={faCheckCircle} className="icon icon-big" />
-          <span className="logo-text ">LET'S DO IT</span>
+          <a className="nav-link active text-gray" aria-current="page" href="/">
+            <FontAwesomeIcon icon={faCheckCircle} className="icon icon-big" />
+            <span className="logo-text ">LET'S DO IT</span>
+          </a>
         </Col>
         <Col xl={2} xs={4} className="ml-3 ">
-          <a className="nav-link active text-gray" aria-current="page" href="#">
-            Change User
+          <a className="nav-link active text-gray" aria-current="page" href="/">
+            Show All
           </a>
         </Col>
       </Container>
