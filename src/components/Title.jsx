@@ -96,7 +96,7 @@ export default function Title(props) {
                         role="checkbox"
                         icon={allSelected ? faCheckSquare : faSquare}
                         aria-label="Select Multiple"
-                        className="icon-big text-light"
+                        className="text-light icon-big"
                       />
                     </a>
                   </div>
