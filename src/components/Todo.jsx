@@ -6,7 +6,7 @@ import {
   faCheckCircle,
   faClock,
   faSquareFull,
-  faCheckSquare,
+  faStopCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { firestore, firebase } from "../firebase";
@@ -59,9 +59,11 @@ const Todo = ({
               <a className="clicker" id="clicker" href="#link">
                 <FontAwesomeIcon
                   role="checkbox"
-                  icon={selected ? faCheckSquare : faSquareFull}
+                  icon={selected ? faStopCircle : faSquareFull}
                   aria-label="Select Individual"
-                  className="icon icon-big"
+                  className={
+                    selected ? "icon icon-big text-warning" : "icon icon-big"
+                  }
                 />
               </a>
             </div>
