@@ -1,4 +1,9 @@
 {
+  "build:testConfig": "cypress-firebase createTestEnvFile",
+  "test": "npm run build:testConfig && cypress run",
+  "test:open": "npm run build:testConfig && cypress open",
+  "test:stage": "npm run test -- --env envName=stage",
+  "test:open:stage": "npm run test:open -- --env envName=stage",
   "name": "todo-list-vanhack",
   "version": "0.1.0",
   "private": true,
@@ -11,6 +16,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^5.0.0",
+    "cypress-firebase": "^1.9.0",
     "firebase": "^8.5.0",
     "firebase-functions": "^3.13.2",
     "firebase-tools": "^9.10.2",
@@ -48,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "cypress": "^7.2.0",
     "eslint-plugin-promise": "^5.1.0"
   }
 }
